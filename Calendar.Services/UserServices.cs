@@ -36,5 +36,30 @@ namespace Calendar.Services
                 return GenericExceptionResult(ex);
             }
         }
+
+        public ResponseDTO InsertUser(UserDTO user)
+        {
+            try
+            {
+                ResponseDTO response = new ResponseDTO();
+
+                //Encriptar
+
+                if (!_repository.InsertUser(user))
+                {
+                    response.Message = "No se ha podido registrar el usuario. Por favor intentelo de nuevo.";
+                    response.IsSucceded = false;
+                    return response;
+                }
+
+                response.Message = "Usuario registrado exitosamente.";
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return GenericExceptionResult(ex);
+            }
+        }
     }
 }

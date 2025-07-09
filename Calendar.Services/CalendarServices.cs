@@ -39,7 +39,7 @@ namespace Calendar.Services
             int totalDays = DateTime.DaysInMonth(year, month);
 
             List<HolidayDTO> holidays = await _HolidayService.GetHolidaysAsync(year, "CR");
-
+            //obtener las tareas del mes para asignarlas a cada dia
 
             for (int i = 1; i <= totalDays; i++)
             {
@@ -50,7 +50,8 @@ namespace Calendar.Services
                 {
                     Date = date,
                     WeekDay = date.DayOfWeek,
-                    HolidayName = holiday?.LocalName
+                    HolidayName = holiday?.LocalName,
+                    assigments = new List<AssigmentDTO>()
                 });
             }
 
