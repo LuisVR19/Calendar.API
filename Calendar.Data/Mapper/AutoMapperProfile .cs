@@ -10,6 +10,13 @@ namespace Calendar.Data.Mapper
         {
 
             CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
+
+            CreateMap<AssigmentDTO, Assigment>();
+            CreateMap<Assigment, AssigmentDTO>();
+
+            CreateMap<AssigmentRecordDTO, AssigmentRecord>();
+            CreateMap<AssigmentRecord, AssigmentRecordDTO>();
 
         }
     }

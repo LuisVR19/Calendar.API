@@ -34,6 +34,7 @@ namespace Calendar.Infrastructure.ServiceInstallers
         public static IServiceCollection AddDataServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAssigmentRepository, AssigmentRepository>();
 
             return services;
         }

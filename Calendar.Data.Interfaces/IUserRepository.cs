@@ -6,5 +6,7 @@ namespace Calendar.Data.Interfaces
     {
         UserDTO GetUserById(int id);
         bool InsertUser(UserDTO userDto);
+        bool ExistsUser(UserDTO userDto);
+
     }
 }

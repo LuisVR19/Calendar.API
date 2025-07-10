@@ -24,10 +24,17 @@ namespace Calendar.Data.Repositories
         {
             User user = AutoMapperHelper.Map<UserDTO, User>(userDto);
             _context.Users.Add(user);
-
             int affectedRows = _context.SaveChanges();
 
             return affectedRows > 0;
+        }
+
+        public bool ExistsUser(UserDTO userDto)
+        {
+            User user = _context.Users
+                .Where(u => u.Email == userDto.Email)
+                .FirstOrDefault();
+            return user != null;
         }
     }
 }

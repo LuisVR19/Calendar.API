@@ -43,6 +43,13 @@ namespace Calendar.Services
             {
                 ResponseDTO response = new ResponseDTO();
 
+                if (_repository.ExistsUser(user))
+                {
+                    response.Message = "El usuario ingresado ya existe.";
+                    response.IsSucceded = false;
+                    return response;
+                }
+
                 //Encriptar
 
                 if (!_repository.InsertUser(user))
