@@ -1,5 +1,6 @@
 ﻿using Calendar.Entities.Contracts;
 using Calendar.Entities.Contracts.Filters;
+using Calendar.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Calendar.API.Controllers
@@ -8,10 +9,16 @@ namespace Calendar.API.Controllers
     [Route("[controller]")]
     public class AssigmentController : ControllerBase
     {
-        [HttpPost]
-        public ResponseDTO CreateAssigment(RequestDTO<BaseFilterDTO> request)
+        private readonly IAssigmentServices _service;
+        public AssigmentController(IAssigmentServices service)
         {
-            return null;
+            _service = service;
+        }
+
+        [HttpPost]
+        public ResponseDTO InsertAssigment(RequestDTO<BaseFilterDTO> request)
+        {
+            return _service.InsertAssigment(request);
         }
 
         [HttpPut]

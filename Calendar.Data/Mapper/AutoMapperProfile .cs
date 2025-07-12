@@ -18,6 +18,13 @@ namespace Calendar.Data.Mapper
             CreateMap<AssigmentRecordDTO, AssigmentRecord>();
             CreateMap<AssigmentRecord, AssigmentRecordDTO>();
 
+
+            CreateMap<WeekDayDTO, WeekDay>();
+            CreateMap<WeekDay, WeekDayDTO>();
+
+            CreateMap<PriorityDTO, Priority>();
+            CreateMap<Priority, PriorityDTO>();
+
         }
     }
 }

@@ -11,11 +11,11 @@ namespace Calendar.Data.Models
         public string Description { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public int? GroupId { get; set; }
+        public Group? Group { get; set; }
         public int PriorityId { get; set; }
         public Priority Priority { get; set; }
         public ICollection<WeekDay> WeekDays { get; set; }
-        public ICollection<AssigmentRecord> TaskHistories { get; set; }
+        public ICollection<AssigmentRecord> AssigmentRecords { get; set; }
     }
 }

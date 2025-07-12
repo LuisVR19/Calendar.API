@@ -41,21 +41,21 @@ namespace Calendar.Services
             var days = new List<DayDTO>();
             int totalDays = DateTime.DaysInMonth(request.year, request.month);
 
-            List<HolidayDTO> holidays = await _HolidayService.GetHolidaysAsync(request.year, "CR");
+            List<HolidayDTO> holidays = await _HolidayService.GetHolidaysAsync(request.year, request.CountryCode);
             
             List<AssigmentDTO> assigments = _repository.GetMonthRecord(request);
 
             for (int i = 1; i <= totalDays; i++)
             {
-                var date = new DateTime(request.year, request.month, i);
-                var holiday = holidays.FirstOrDefault(h => h.Date.Date == date.Date);
+                var newDay = new DateTime(request.year, request.month, i);
+                var holiday = holidays.FirstOrDefault(h => h.Date.Date == newDay.Date);
 
                 days.Add(new DayDTO
                 {
-                    Date = date,
-                    WeekDay = date.DayOfWeek,
+                    Date = newDay,
+                    WeekDay = newDay.DayOfWeek,
                     HolidayName = holiday?.LocalName,
-                    assigments = assigments.Where(a => a.WeekDays.Any(wk => wk.Day == (int)date.DayOfWeek)).ToList()
+                    assigments = assigments.Where(a => a.WeekDays.Any(wk => wk.Day == (int)newDay.DayOfWeek)).ToList()
                 });
             }
 

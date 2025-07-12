@@ -1,5 +1,6 @@
 ﻿using Calendar.Data.Interfaces;
 using Calendar.Entities.Contracts;
+using Calendar.Entities.Contracts.Filters;
 using Calendar.Entities.DTOs;
 using Calendar.Services.Bases;
 using Calendar.Services.Interfaces;
@@ -37,11 +38,12 @@ namespace Calendar.Services
             }
         }
 
-        public ResponseDTO InsertUser(UserDTO user)
+        public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO> request)
         {
             try
             {
                 ResponseDTO response = new ResponseDTO();
+                UserDTO user = (UserDTO)request.data;
 
                 if (_repository.ExistsUser(user))
                 {

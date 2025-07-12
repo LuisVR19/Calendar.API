@@ -4,6 +4,7 @@ using Calendar.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Calendar.Data.Migrations
 {
     [DbContext(typeof(CalendarDBContext))]
-    partial class CalendarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250712030011_assigmentsUpdate")]
+    partial class assigmentsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Calendar.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AssigmentWeekDay", b =>
-                {
-                    b.Property<int>("AssigmentsAssigmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeekDaysWeekDayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AssigmentsAssigmentId", "WeekDaysWeekDayId");
-
-                    b.HasIndex("WeekDaysWeekDayId");
-
-                    b.ToTable("AssigmentWeekDay");
-                });
 
             modelBuilder.Entity("Calendar.Data.Models.Assigment", b =>
                 {
@@ -173,6 +161,9 @@ namespace Calendar.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WeekDayId"));
 
+                    b.Property<int?>("AssigmentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
@@ -181,6 +172,8 @@ namespace Calendar.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WeekDayId");
+
+                    b.HasIndex("AssigmentId");
 
                     b.HasIndex("Day")
                         .IsUnique();
@@ -201,21 +194,6 @@ namespace Calendar.Data.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("GroupUser", "User");
-                });
-
-            modelBuilder.Entity("AssigmentWeekDay", b =>
-                {
-                    b.HasOne("Calendar.Data.Models.Assigment", null)
-                        .WithMany()
-                        .HasForeignKey("AssigmentsAssigmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Calendar.Data.Models.WeekDay", null)
-                        .WithMany()
-                        .HasForeignKey("WeekDaysWeekDayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Calendar.Data.Models.Assigment", b =>
@@ -254,6 +232,13 @@ namespace Calendar.Data.Migrations
                     b.Navigation("Assigment");
                 });
 
+            modelBuilder.Entity("Calendar.Data.Models.WeekDay", b =>
+                {
+                    b.HasOne("Calendar.Data.Models.Assigment", null)
+                        .WithMany("WeekDays")
+                        .HasForeignKey("AssigmentId");
+                });
+
             modelBuilder.Entity("GroupUser", b =>
                 {
                     b.HasOne("Calendar.Data.Models.Group", null)
@@ -272,6 +257,8 @@ namespace Calendar.Data.Migrations
             modelBuilder.Entity("Calendar.Data.Models.Assigment", b =>
                 {
                     b.Navigation("TaskHistories");
+
+                    b.Navigation("WeekDays");
                 });
 #pragma warning restore 612, 618
         }

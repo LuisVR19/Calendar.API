@@ -27,6 +27,7 @@ namespace Calendar.Infrastructure.ServiceInstallers
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<ICalendarServices, CalendarServices>();
             services.AddScoped<IHolidayProvider, HolidayProvider>();
+            services.AddScoped<IAssigmentServices, AssigmentServices>();
 
             return services;
         }

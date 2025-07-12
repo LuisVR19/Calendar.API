@@ -10,5 +10,6 @@ namespace Calendar.Data.Models
         public int WeekDayId { get; set; }
         public string Name { get; set; }
         public int Day { get; set; }
+        public ICollection<Assigment> Assigments { get; set; }
     }
 }
