@@ -17,12 +17,14 @@ namespace Calendar.API.Controllers
         }
 
         [HttpPost]
+        [Route("InsertAssigment")]
         public ResponseDTO InsertAssigment(RequestDTO<BaseFilterDTO, AssigmentDTO> request)
         {
             return _service.InsertAssigment(request);
         }
 
         [HttpPut]
+        [Route("UpdateAssigment")]
         public ResponseDTO UpdateAssigment(RequestDTO<BaseFilterDTO, AssigmentDTO> request)
         {
             return _service.UpdateAssigment(request);

@@ -9,12 +9,14 @@ namespace Calendar.API.Controllers
     public class GroupController : ControllerBase
     {
         [HttpPost]
+        [Route("CreateGroup")]
         public ResponseDTO CreateGroup(RequestDTO<BaseFilterDTO, Object> request)
         {
             return null;
         }
 
         [HttpPut]
+        [Route("UpdateGroup")]
         public ResponseDTO UpdateGroup(RequestDTO<BaseFilterDTO, Object> request)
         {
             return null;

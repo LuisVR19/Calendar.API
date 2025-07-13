@@ -16,6 +16,7 @@ namespace Calendar.API.Controllers
         }
 
         [HttpPost]
+        [Route("GetMonthByDate")]
         public Task<ResponseDTO> GetMonthByDate([FromBody] RequestDTO<CalendarFilterDTO, Object> request)
         {
             return _service.GetMonthByDate(request);

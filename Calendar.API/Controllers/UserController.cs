@@ -17,12 +17,14 @@ namespace Calendar.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetUserById")]
         public ResponseDTO GetUserById(int id)
         {
             return _service.GetById(id);
         }
 
         [HttpPost]
+        [Route("InsertUser")]
         public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO, UserDTO> request)
         {
             return _service.InsertUser(request);

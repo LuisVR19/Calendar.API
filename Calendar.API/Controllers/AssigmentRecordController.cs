@@ -8,6 +8,7 @@ namespace Calendar.API.Controllers
     public class AssigmentRecordController : ControllerBase
     {
         [HttpPut]
+        [Route("SetCompleteStatus")]
         public ResponseDTO SetCompleteStatus()
         {
             return null;
