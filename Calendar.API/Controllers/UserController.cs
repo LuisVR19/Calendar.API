@@ -1,5 +1,6 @@
 ﻿using Calendar.Entities.Contracts;
 using Calendar.Entities.Contracts.Filters;
+using Calendar.Entities.DTOs;
 using Calendar.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@ namespace Calendar.API.Controllers
         }
 
         [HttpPost]
-        public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO> request)
+        public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO, UserDTO> request)
         {
             return _service.InsertUser(request);
         }

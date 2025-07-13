@@ -12,7 +12,10 @@ namespace Calendar.Data.Mapper
             CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>();
 
-            CreateMap<AssigmentDTO, Assigment>();
+            CreateMap<AssigmentDTO, Assigment>()
+               .ForMember(dest => dest.User, opt => opt.Ignore())
+               .ForMember(dest => dest.Priority, opt => opt.Ignore())
+               .ForMember(dest => dest.AssigmentRecords, opt => opt.Ignore());
             CreateMap<Assigment, AssigmentDTO>();
 
             CreateMap<AssigmentRecordDTO, AssigmentRecord>();

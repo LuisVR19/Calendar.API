@@ -8,6 +8,6 @@ namespace Calendar.Services.Interfaces
     public interface IUserServices : IGet
     {
         //ResponseDTO GetUserById(int id);
-        ResponseDTO InsertUser(RequestDTO<BaseFilterDTO> request);
+        ResponseDTO InsertUser(RequestDTO<BaseFilterDTO, UserDTO> request);
     }
 }

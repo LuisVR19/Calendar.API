@@ -19,7 +19,7 @@ namespace Calendar.Services
             _HolidayService = holidayService;
         }
 
-        public async Task<ResponseDTO> GetMonthByDate(RequestDTO<CalendarFilterDTO> request)
+        public async Task<ResponseDTO> GetMonthByDate(RequestDTO<CalendarFilterDTO, Object> request)
         {
             try
             {

@@ -5,6 +5,6 @@ namespace Calendar.Services.Interfaces
 {
     public interface ICalendarServices
     {
-        Task<ResponseDTO> GetMonthByDate(RequestDTO<CalendarFilterDTO> request);
+        Task<ResponseDTO> GetMonthByDate(RequestDTO<CalendarFilterDTO, Object> request);
     }
 }

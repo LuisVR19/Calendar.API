@@ -6,5 +6,6 @@
         public int PageSize { get; set; }
         public bool OrderDesc { get; set; }
         public string GeneralName { get; set; }
+        public string IdToSearch { get; set; }
     }
 }

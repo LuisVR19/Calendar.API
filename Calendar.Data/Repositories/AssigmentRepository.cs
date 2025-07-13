@@ -19,14 +19,32 @@ namespace Calendar.Data.Repositories
         public bool InsertAssigment(AssigmentDTO assigmentDto)
         {
             Assigment assigment = AutoMapperHelper.Map<AssigmentDTO, Assigment>(assigmentDto);
+
+            assigment.WeekDays = GetWeekDaysByAssigment(assigmentDto);
+
             _context.Assigments.Add(assigment);
+            int affectedRows = _context.SaveChanges();
+            return affectedRows > 0;
+        }
+
+        public bool UpdateAssigment(AssigmentDTO assigmentDto)
+        {
+            var assigment = _context.Assigments
+               .Include(a => a.WeekDays)
+               .FirstOrDefault(a => a.AssigmentId == assigmentDto.AssigmentId);
+
+            AutoMapperHelper.MapProperties(assigmentDto, assigment);
+
+            assigment.WeekDays.Clear();
+            assigment.WeekDays = GetWeekDaysByAssigment(assigmentDto);
+
             int affectedRows = _context.SaveChanges();
             return affectedRows > 0;
         }
 
         public bool ExistsAssigment(AssigmentDTO assigmentDto)
         {
-            Assigment assigment = _context.Assigments
+            Assigment? assigment = _context.Assigments
                 .Where(a => a.Description == assigmentDto.Description && a.User.UserId == assigmentDto.User.UserId)
                 .FirstOrDefault();
             return assigment != null;
@@ -57,5 +75,28 @@ namespace Calendar.Data.Repositories
 
             return AutoMapperHelper.Map<List<Assigment>, List<AssigmentDTO>>(list);
         }
+
+        private List<WeekDay> GetWeekDaysByAssigment(AssigmentDTO assigmentDto)
+        {
+            var weekDayIds = assigmentDto.WeekDays.Select(w => w.WeekDayId).ToList();
+
+            return _context.WeekDays
+                .Where(w => weekDayIds.Contains(w.WeekDayId))
+                .ToList();
+        }
+
+        public List<AssigmentDTO> GetByUser(int userId)
+        {
+            List<Assigment> list = new List<Assigment>();
+
+            list = _context.Assigments
+                .Include(a => a.Priority)
+                .Include(a => a.WeekDays)
+                .Where(a => a.UserId == userId)
+                .ToList();
+
+            return AutoMapperHelper.Map<List<Assigment>, List<AssigmentDTO>>(list);
+        }
+
     }
 }

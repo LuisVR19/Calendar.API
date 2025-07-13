@@ -20,5 +20,10 @@ namespace Calendar.Data.Mapper
         {
             return _mapper.Map<TDestino>(origen);
         }
+
+        public static void MapProperties<TSource, TDestination>(TSource source, TDestination destination)
+        {
+            _mapper.Map(source, destination);
+        }
     }
 }

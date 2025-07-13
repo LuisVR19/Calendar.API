@@ -2,12 +2,11 @@
 using Calendar.Entities.Contracts;
 using Calendar.Entities.Contracts.Filters;
 using Calendar.Entities.DTOs;
-using Calendar.Services.Bases;
 using Calendar.Services.Interfaces;
 
 namespace Calendar.Services
 {
-    public class UserServices : BaseService, IUserServices
+    public class UserServices : IUserServices
     {
         private readonly IUserRepository _repository;
         public UserServices(IUserRepository repository)
@@ -34,11 +33,11 @@ namespace Calendar.Services
                 return response;
             }
             catch (Exception ex) {
-                return GenericExceptionResult(ex);
+                return null;
             }
         }
 
-        public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO> request)
+        public ResponseDTO InsertUser(RequestDTO<BaseFilterDTO, UserDTO> request)
         {
             try
             {
@@ -67,7 +66,8 @@ namespace Calendar.Services
             }
             catch (Exception ex)
             {
-                return GenericExceptionResult(ex);
+                return null;
+                //return GenericExceptionResult(ex);
             }
         }
     }
